@@ -57,22 +57,26 @@ export const getUIC_Ref_Area = async (
 };
 
 const sortLinks = (links: Link[], option: SortOption): Link[] => {
-	return links.sort((a, b) => {
-		const fileA = a.sourceFile;
-		const fileB = b.sourceFile;
-		switch (option) {
-			case "name-asc":
-				return fileA?.basename.localeCompare(fileB?.basename);
-			case "name-desc":
-				return fileB?.basename.localeCompare(fileA?.basename);
-			case "mtime-asc":
-				return fileA?.stat.mtime - fileB?.stat.mtime;
-			case "mtime-desc":
-				return fileB?.stat.mtime - fileA?.stat.mtime;
-			default:
-				return 0;
-		}
-	});
+  return links.sort((a, b) => {
+    const fileA = a.sourceFile;
+    const fileB = b.sourceFile;
+    switch (option) {
+      case 'name-asc':
+        return fileA?.basename.localeCompare(fileB?.basename);
+      case 'name-desc':
+        return fileB?.basename.localeCompare(fileA?.basename);
+      case 'mtime-asc':
+        return fileA?.stat.mtime - fileB?.stat.mtime;
+      case 'mtime-desc':
+        return fileB?.stat.mtime - fileA?.stat.mtime;
+      case 'ctime-asc':
+        return fileA?.stat.ctime - fileB?.stat.ctime;
+      case 'ctime-desc':
+        return fileB?.stat.ctime - fileA?.stat.ctime;
+      default:
+        return 0;
+    }
+  });
 };
 
 // Creates a DIV for a collection of reference blocks to be displayed
